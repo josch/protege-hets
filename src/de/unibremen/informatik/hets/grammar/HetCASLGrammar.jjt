@@ -1,0 +1,270 @@
+options {
+//    MULTI=true;
+//    NODE_EXTENDS="MyNode";
+    TRACK_TOKENS=true;
+    UNICODE_INPUT=true;
+    STATIC=false;
+}
+
+PARSER_BEGIN(HetCASLParser)
+package de.unibremen.informatik.hets.grammar;
+
+import java.util.Hashtable;
+
+public class HetCASLParser {}
+PARSER_END(HetCASLParser)
+
+SKIP : { " " | "\t" | "\n" | "\r" }
+
+/* COMMENTS */
+
+SPECIAL_TOKEN :
+{
+  <SINGLE_LINE_COMMENT: "%%" (~["\n","\r"])* ("\n"|"\r"|"\r\n")>
+}
+
+TOKEN : {
+/* reserved */
+  < _AND: "and" >
+| < _ARCH: "arch" >
+| < _AS: "as" >
+| < _AXIOM: "axiom" >
+| < _AXIOMS: "axioms" >
+| < _CLOSED: "closed" >
+| < _DEF: "def" >
+| < _ELSE: "else" >
+| < _END: "end" >
+| < _EXISTS: "exists" >
+| < _FALSE: "false" >
+| < _FIT: "fit" >
+| < _FORALL: "forall" >
+| < _FREE: "free" >
+| < _FROM: "from" >
+| < _GENERATED: "generated" >
+| < _GET: "get" >
+| < _GIVEN: "given" >
+| < _HIDE: "hide" >
+| < _IF: "if" >
+| < _IN: "in" >
+| < _LAMBDA: "lambda" >
+| < _LIBRARY: "library" >
+| < _LOCAL: "local" >
+| < _NOT: "not" >
+| < _OP: "op" >
+| < _OPS: "ops" >
+| < _PRED: "pred" >
+| < _PREDS: "preds" >
+| < _RESULT: "result" >
+| < _REVEAL: "reveal" >
+| < _SORT: "sort" >
+| < _SORTS: "sorts" >
+| < _SPEC: "spec" >
+| < _THEN: "then" >
+| < _TO: "to" >
+| < _TRUE: "true" >
+| < _TYPE: "type" >
+| < _TYPEs: "types" >
+| < _UNIT: "unit" >
+| < _UNITS: "units" >
+| < _VAR: "var" >
+| < _VARS: "vars" >
+| < _VERSION: "version" >
+| < _VIEW: "view" >
+| < _WHEN: "when" >
+| < _WITH: "with" >
+| < _WITHIN: "within" >
+/* not reserved */
+| < _ASSOC: "assoc" >
+| < _COMM: "comm" >
+| < _IDEM: "idem" >
+/* hetcasl */
+| < _LOGIC: "logic" >
+| < _DATA: "data" >
+/* helper */
+//| < _EQUALS: "=" >
+}
+
+/* specification libraries */
+TOKEN : {
+  < LIB_NAME : <LIB_ID> | ( <LIB_ID> <VERSION_NUMBER> ) >
+}
+
+TOKEN : {
+  < LIB_ID : <URL> | <PATH> >
+}
+
+TOKEN : {
+  < VERSION_NUMBER : ( <NUMBER> )+ >
+}
+
+/* words */
+
+TOKEN : {
+  < WORDS : <WORD> ( "_" <WORD> )* >
+}
+
+TOKEN : {
+  < DOT_WORDS : "." <WORDS> >
+}
+
+TOKEN : {
+  < WORD : ( <WORD_CHAR> )+ >
+}
+
+TOKEN : {
+  < WORD_CHAR : <LETTER> | "’" | <DIGIT> >
+}
+
+TOKEN : {
+  < LETTER : [ "A"-"Z", "a"-"z", "À", "Á", "Â", "Ã", "Ä", "Å", "Æ", "Ç", "È", "É",
+               "Ê", "Ë", "Ì", "Í", "Î", "Ï", "Ð", "Ñ", "Ò", "Ó", "Ô", "Õ", "Ö",
+               "Ø", "Ù", "Ú", "Û", "Ü", "Ý", "Þ", "ß", "à", "á", "â", "ã", "ä",
+               "å", "æ", "ç", "è", "é", "ê", "ë", "ì", "í", "î", "ï", "ð", "ñ",
+               "ò", "ó", "ô", "õ", "ö", "ø", "ù", "ú", "û", "ü", "ý", "þ", "ÿ" ] >
+}
+
+TOKEN : {
+  < DIGIT : [ "0"-"9" ] >
+}
+
+/* signs */
+
+TOKEN : {
+ < SIGNS : ( <SIGN> )+ >
+}
+
+TOKEN : {
+  < SIGN : [ "+", "-", "*", "/", "\\", "&", /* "=",*/ "<", ">",
+             "!", "?", ":", ".", "$", "@", "#", "ˆ", "˜",
+             "¡", "¿", "×", "÷", "£", "c", "±", "¶", "§",
+             "1", "2", "3", "·", "c", "◦", "¬", "µ", "|" ] >
+}
+
+/* literal strings and numbers */
+
+TOKEN : {
+  < NUMBER : ( <DIGIT> )+ >
+}
+
+/* urls and paths */
+
+TOKEN : {
+  < PATH_CHAR : [ "A"-"Z", "a"-"z", "0"-"9",
+                  "$", "-", "_", "@", ".", "&", "+", "!", "*",
+                  "\"", "’", "(", ")", ",", ":", "~" ]
+              | ("%" <HEX_CHAR> <HEX_CHAR>) >
+}
+
+TOKEN : {
+  < HEX_CHAR : [ "A"-"F", "a"-"f", "0"-"9" ] >
+}
+
+TOKEN : {
+  < PATH_WORD : ( <PATH_CHAR> )+ >
+}
+
+TOKEN : {
+  < PATH : <PATH_WORD> ( "/" <PATH_WORD> )+ >
+}
+
+TOKEN : {
+  < URL : "http://" <PATH>
+        | "ftp://" <PATH>
+        | "file:///" <PATH> >
+}
+
+TOKEN : {
+  < _EQUALS : "=" > : IN_SPEC
+}
+
+<IN_SPEC> MORE : {
+  < ~[] >
+}
+
+<IN_SPEC> SPECIAL_TOKEN : {
+  < EXT_ANNO_CONS : "%cons" >
+}
+<IN_SPEC> SPECIAL_TOKEN : {
+  < EXT_ANNO_MONO : "%mono" >
+}
+<IN_SPEC> SPECIAL_TOKEN : {
+  < EXT_ANNO_DEF : "%def" >
+}
+<IN_SPEC> SPECIAL_TOKEN : {
+  < EXT_ANNO_IMPLIES : "%implies" >
+}
+
+<IN_SPEC> TOKEN : {
+//  < SPEC_AND : <_AND> > : IN_SPEC
+ < SPEC_THEN : <_THEN> > : IN_SPEC
+| < SPEC_END : <_END> > : DEFAULT
+}
+
+/* basic spec */
+
+SimpleNode LIB_DEFN() :
+{
+	String value;
+	Token t;
+}
+{
+	<_LIBRARY> t=<LIB_NAME> ( LOGIC() )+
+	{
+		value = t.image;
+		jjtThis.jjtSetValue(value);
+		return jjtThis;
+	}
+}
+
+void LOGIC() :
+{
+	String value;
+	Token t;
+}
+{
+	<_LOGIC> t=<WORDS> ( SPEC_DEFN() )+
+	{
+		value = t.image;
+		jjtThis.jjtSetValue(value);
+	}
+}
+
+void SPEC_DEFN() :
+{
+	String value;
+	Token t;
+}
+{
+	<_SPEC> t=<WORDS> <_EQUALS> ( SPEC_END() | ( SPEC_THEN() )+ SPEC_END() )
+	{
+		value = t.image;
+		jjtThis.jjtSetValue(value);
+	}
+}
+
+void SPEC_END() :
+{
+	String value;
+	Token t;
+}
+{
+	t = <SPEC_END>
+	{
+		t.image = t.image.substring(0, t.image.length()-3);
+		value = t.image;
+		jjtThis.jjtSetValue(value);
+	}
+}
+void SPEC_THEN() :
+{
+	String value;
+	Token t;
+}
+{
+	t = <SPEC_THEN>
+	{
+		t.image = t.image.substring(0, t.image.length()-4);
+		value = t.image;
+		jjtThis.jjtSetValue(value);
+	}
+}
