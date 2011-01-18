@@ -1,57 +1,33 @@
 <?xml version="1.0" ?>
 <plugin>
+
    <extension
          id="HetsImportAction"
          point="org.protege.editor.core.application.EditorKitMenuAction">
-      <name
-            value="Import HetCASL">
-      </name>
-      <path
-            value="org.protege.editor.owl.menu.tools/SlotH-A">
-      </path>
-      <editorKitId
-            value="OWLEditorKit">
-      </editorKitId>
-      <class
-            value="de.unibremen.informatik.hets.protege.ImportHetsAction">
-      </class>
-      <toolTip
-            value="import OWL from HetCASL files">
-      </toolTip>
+      <name value="Import HetCASL" />
+      <path value="org.protege.editor.owl.menu.tools/SlotH-A" />
+      <editorKitId value="OWLEditorKit" />
+      <class value="de.unibremen.informatik.hets.protege.ImportHetsAction" />
+      <toolTip value="import OWL from HetCASL files" />
    </extension>
+
    <extension
          id="HetsExportAction"
          point="org.protege.editor.core.application.EditorKitMenuAction">
-      <name
-            value="Export HetCASL">
-      </name>
-      <path
-            value="org.protege.editor.owl.menu.tools/SlotH-B">
-      </path>
-      <editorKitId
-            value="OWLEditorKit">
-      </editorKitId>
-      <class
-            value="de.unibremen.informatik.hets.protege.ExportHetsAction">
-      </class>
-      <toolTip
-            value="export OWL to HetCASL file">
-      </toolTip>
+      <name value="Export HetCASL" />
+      <path value="org.protege.editor.owl.menu.tools/SlotH-B" />
+      <editorKitId value="OWLEditorKit" />
+      <class value="de.unibremen.informatik.hets.protege.ExportHetsAction" />
+      <toolTip value="export OWL to HetCASL file" />
    </extension>
+
    <extension
          id="HetCASL"
          point="org.protege.editor.core.application.ViewComponent">
-      <label
-            value="HetCASL rendering">
-      </label>
-      <class
-            value="de.unibremen.informatik.hets.protege.HetCASLRenderingViewComponent">
-      </class>
-      <headerColor
-            value="@org.protege.ontologycolor">
-      </headerColor>
-      <category
-            value="@org.protege.ontologycategory">
-      </category>
+      <label value="HetCASL rendering" />
+      <class value="de.unibremen.informatik.hets.protege.HetCASLRenderingViewComponent" />
+      <headerColor value="@org.protege.ontologycolor" />
+      <category value="@org.protege.ontologycategory" />
    </extension>
+
 </plugin>
