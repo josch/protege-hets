@@ -178,6 +178,9 @@
 
    <target name = "clean">
      <delete dir = "${build}"/>
+     <delete>
+       <fileset dir = "${src}/de/unibremen/informatik/hets/grammar/" includes = "*.java *.jj" />
+     </delete>
    </target>
 
 
