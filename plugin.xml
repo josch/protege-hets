@@ -1,9 +1,8 @@
 <?xml version="1.0" ?>
 <plugin>
 
-   <extension
-         id="HetsImportAction"
-         point="org.protege.editor.core.application.EditorKitMenuAction">
+   <extension id="HetsImportAction"
+              point="org.protege.editor.core.application.EditorKitMenuAction">
       <name value="Import HetCASL" />
       <path value="org.protege.editor.owl.menu.tools/SlotH-A" />
       <editorKitId value="OWLEditorKit" />
@@ -11,9 +10,8 @@
       <toolTip value="import OWL from HetCASL files" />
    </extension>
 
-   <extension
-         id="HetsExportAction"
-         point="org.protege.editor.core.application.EditorKitMenuAction">
+   <extension id="HetsExportAction"
+              point="org.protege.editor.core.application.EditorKitMenuAction">
       <name value="Export HetCASL" />
       <path value="org.protege.editor.owl.menu.tools/SlotH-B" />
       <editorKitId value="OWLEditorKit" />
@@ -21,13 +19,17 @@
       <toolTip value="export OWL to HetCASL file" />
    </extension>
 
-   <extension
-         id="HetCASL"
-         point="org.protege.editor.core.application.ViewComponent">
+   <extension id="HetCASL"
+              point="org.protege.editor.core.application.ViewComponent">
       <label value="HetCASL rendering" />
       <class value="de.unibremen.informatik.hets.protege.HetCASLRenderingViewComponent" />
       <headerColor value="@org.protege.ontologycolor" />
       <category value="@org.protege.ontologycategory" />
    </extension>
 
+   <extension id="HetsPrefs"
+              point="org.protege.editor.core.application.preferencespanel">
+       <label value="Hets"/>
+       <class value="de.unibremen.informatik.hets.protege.HetsPreferencesPane"/>
+   </extension>
 </plugin>
