@@ -23,29 +23,38 @@ public class HetsPreferencesPane extends OWLPreferencesPanel {
     public void initialise() throws Exception {
         setLayout(new BorderLayout());
 
-        OWLPreferencesPanel foo = new Foobar();
-        OWLPreferencesPanel bar = new Foobar();
-        OWLPreferencesPanel baz = new Foobar();
+        OWLPreferencesPanel dotpath = new DotPath();
+        OWLPreferencesPanel hetspath = new HetsPath();
+        OWLPreferencesPanel cgiurl = new CGIUrl();
+        OWLPreferencesPanel restfulhets = new RestFulHets();
 
         JTabbedPane tabPane = new JTabbedPane();
 
-        Box box = new Box(BoxLayout.Y_AXIS);
-        box.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
-        box.add(foo);
-        box.add(Box.createVerticalStrut(7));
-        box.add(bar);
-        box.add(Box.createVerticalStrut(7));
-        box.add(baz);
+        Box box1 = new Box(BoxLayout.Y_AXIS);
+        box1.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
+        box1.add(dotpath);
+        box1.add(Box.createVerticalStrut(7));
+        box1.add(hetspath);
+        box1.add(Box.createVerticalStrut(7));
+        box1.add(cgiurl);
+        box1.add(Box.createVerticalStrut(7));
+        box1.add(restfulhets);
 
-        tabPane.add("General Options", box);
+        tabPane.add("General Options", box1);
 
-        optionPages.add(foo);
-        optionPages.add(bar);
-        optionPages.add(baz);
+        optionPages.add(dotpath);
+        optionPages.add(hetspath);
+        optionPages.add(cgiurl);
+        optionPages.add(restfulhets);
 
-        foo.initialise();
-        bar.initialise();
-        baz.initialise();
+        dotpath.initialise();
+        hetspath.initialise();
+        cgiurl.initialise();
+        restfulhets.initialise();
+
+        Box box2 = new Box(BoxLayout.Y_AXIS);
+
+        tabPane.add("Graph Options", box2);
 
         add(tabPane, BorderLayout.NORTH);
     }
@@ -56,7 +65,40 @@ public class HetsPreferencesPane extends OWLPreferencesPanel {
         }
     }
 
-    class Foobar extends OWLPreferencesPanel {
+    class DotPath extends OWLPreferencesPanel {
+        private JTextField pathField;
+
+        public void applyChanges() {
+            HetsPreferences.getInstance().setDotPath(pathField.getText());
+        }
+
+        public void initialise() throws Exception {
+            setLayout(new BorderLayout(12, 12));
+
+            setBorder(BorderFactory.createTitledBorder("Dot Application Path"));
+
+            Box panel = new Box(BoxLayout.LINE_AXIS);
+
+            pathField = new JTextField(15);
+            pathField.setText(HetsPreferences.getInstance().getDotPath());
+
+            JButton browseButton = new JButton(new AbstractAction("Browse") {
+                    public void actionPerformed(ActionEvent e) {
+                    }
+            });
+
+            panel.add(new JLabel("Path:"));
+            panel.add(pathField);
+            panel.add(browseButton);
+
+            add(panel);
+        }
+
+        public void dispose() throws Exception {
+        }
+    }
+
+    class HetsPath extends OWLPreferencesPanel {
         private JTextField pathField;
 
         public void applyChanges() {
@@ -66,7 +108,7 @@ public class HetsPreferencesPane extends OWLPreferencesPanel {
         public void initialise() throws Exception {
             setLayout(new BorderLayout(12, 12));
 
-            setBorder(BorderFactory.createTitledBorder("Dot Application Path"));
+            setBorder(BorderFactory.createTitledBorder("Hets Application Path"));
 
             Box panel = new Box(BoxLayout.LINE_AXIS);
 
@@ -81,6 +123,61 @@ public class HetsPreferencesPane extends OWLPreferencesPanel {
             panel.add(new JLabel("Path:"));
             panel.add(pathField);
             panel.add(browseButton);
+
+            add(panel);
+        }
+
+        public void dispose() throws Exception {
+        }
+    }
+
+
+    class CGIUrl extends OWLPreferencesPanel {
+        private JTextField pathField;
+
+        public void applyChanges() {
+            HetsPreferences.getInstance().setCGIUrl(pathField.getText());
+        }
+
+        public void initialise() throws Exception {
+            setLayout(new BorderLayout(12, 12));
+
+            setBorder(BorderFactory.createTitledBorder("CGI Url"));
+
+            Box panel = new Box(BoxLayout.LINE_AXIS);
+
+            pathField = new JTextField(15);
+            pathField.setText(HetsPreferences.getInstance().getCGIUrl());
+
+            panel.add(new JLabel("Url:"));
+            panel.add(pathField);
+
+            add(panel);
+        }
+
+        public void dispose() throws Exception {
+        }
+    }
+
+    class RestFulHets extends OWLPreferencesPanel {
+        private JTextField pathField;
+
+        public void applyChanges() {
+            HetsPreferences.getInstance().setRestFulUrl(pathField.getText());
+        }
+
+        public void initialise() throws Exception {
+            setLayout(new BorderLayout(12, 12));
+
+            setBorder(BorderFactory.createTitledBorder("Hets RestFul Url"));
+
+            Box panel = new Box(BoxLayout.LINE_AXIS);
+
+            pathField = new JTextField(15);
+            pathField.setText(HetsPreferences.getInstance().getRestFulUrl());
+
+            panel.add(new JLabel("Url:"));
+            panel.add(pathField);
 
             add(panel);
         }
