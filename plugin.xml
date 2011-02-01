@@ -1,19 +1,46 @@
 <?xml version="1.0" ?>
 <plugin>
 
-   <extension id="HetsImportAction"
+   <extension id="menu.HetsMenu"
+	      name="HetsMenu"
               point="org.protege.editor.core.application.EditorKitMenuAction">
-      <name value="Import HetCASL" />
+      <name value="Hets"/>
+      <path value="/SlotH-A"/>
+      <editorKitId value="any"/>
+      <toolTip value="Hets menu tool tip!"/>
+   </extension>
+
+   <extension id="HetsLocalImportAction"
+              point="org.protege.editor.core.application.EditorKitMenuAction">
+      <name value="Import HetCASL (local hets)" />
       <path value="org.protege.editor.owl.menu.tools/SlotH-A" />
       <editorKitId value="OWLEditorKit" />
+      <class value="de.unibremen.informatik.hets.protege.LocalImportHetsAction" />
+      <toolTip value="import OWL from HetCASL files using local hets installation" />
+   </extension>
+
+   <extension id="HetsCGIImportAction"
+              point="org.protege.editor.core.application.EditorKitMenuAction">
+      <name value="Import HetCASL (remote cgi)" />
+      <path value="org.protege.editor.owl.menu.tools/SlotH-B" />
+      <editorKitId value="OWLEditorKit" />
+      <class value="de.unibremen.informatik.hets.protege.CGIImportHetsAction" />
+      <toolTip value="import OWL from HetCASL files using online cgi" />
+   </extension>
+
+   <extension id="HetsImportAction"
+              point="org.protege.editor.core.application.EditorKitMenuAction">
+      <name value="Import HetCASL (custom parser)" />
+      <path value="org.protege.editor.owl.menu.tools/SlotH-C" />
+      <editorKitId value="OWLEditorKit" />
       <class value="de.unibremen.informatik.hets.protege.ImportHetsAction" />
-      <toolTip value="import OWL from HetCASL files" />
+      <toolTip value="import OWL from HetCASL files using local parser" />
    </extension>
 
    <extension id="HetsExportAction"
               point="org.protege.editor.core.application.EditorKitMenuAction">
       <name value="Export HetCASL" />
-      <path value="org.protege.editor.owl.menu.tools/SlotH-B" />
+      <path value="org.protege.editor.owl.menu.tools/SlotH-D" />
       <editorKitId value="OWLEditorKit" />
       <class value="de.unibremen.informatik.hets.protege.ExportHetsAction" />
       <toolTip value="export OWL to HetCASL file" />
