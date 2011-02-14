@@ -7,10 +7,12 @@ public class SpecDefn {
     private ArrayList<Spec> specs;
     private String name;
     private String logic;
+    private String annotation;
 
-    public SpecDefn(String n, String l) {
+    public SpecDefn(String n, String l, String a) {
         name = n;
         logic = l;
+        annotation = a;
         specs = new ArrayList<Spec>();
     }
 
@@ -25,12 +27,16 @@ public class SpecDefn {
     public String toString() {
         StringBuilder builder = new StringBuilder();
 
+        if (annotation != null && annotation != "") {
+            builder.append(annotation);
+            builder.append("\n");
+        }
         builder.append("spec ");
         builder.append(name);
         builder.append(" =");
 
         Iterator<Spec> it = specs.iterator();
-        for (;;) {
+        while (it.hasNext()) {
             Spec spec = it.next();
             String annotation = spec.getAnnotation();
 

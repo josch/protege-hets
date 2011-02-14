@@ -54,6 +54,22 @@ public class Dom {
         return null;
     }
 
+    public static Element getSecondChildElement(Node item) {
+        NodeList list = item.getChildNodes();
+        int count = 0;
+        for (int i = 0; i < list.getLength(); i++) {
+            Node child = list.item(i);
+            if (child.getNodeType() == Node.ELEMENT_NODE) {
+                if (count == 1) {
+                    return (Element)child;
+                } else {
+                    count++;
+                }
+            }
+        }
+        return null;
+    }
+
     public static Node getFirstChild(Node item, String name) {
         NodeList list = item.getChildNodes();
         for (int i = 0; i < list.getLength(); i++) {

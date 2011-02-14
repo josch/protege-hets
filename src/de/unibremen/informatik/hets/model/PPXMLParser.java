@@ -7,6 +7,7 @@ import java.io.IOException;
 import de.unibremen.informatik.hets.model.HetFile;
 import de.unibremen.informatik.hets.model.PPXMLParserException;
 import de.unibremen.informatik.hets.common.xml.Dom;
+import de.unibremen.informatik.hets.common.io.IOUtils;
 import de.unibremen.informatik.hets.common.lang.StringUtils;
 
 import org.w3c.dom.Document;
@@ -133,9 +134,17 @@ public class PPXMLParser {
                     throw new PPXMLParserException();
                 }
 
-                SpecDefn specdefn = new SpecDefn(((Element)item).getAttribute("name"), currentlogic);
+                String annotation = "";
 
                 Element child = Dom.getFirstChildElement(item);
+
+                if (child.getTagName() == "Left") {
+                    annotation = Dom.getTextContent(Dom.getFirstChildElement(child));
+
+                    child = Dom.getSecondChildElement(item);
+                }
+
+                SpecDefn specdefn = new SpecDefn(((Element)item).getAttribute("name"), currentlogic, annotation);
 
                 if (child.getTagName() == "Basicspec") {
                     specdefn.add(parsespecspec(hetfile, child));
@@ -145,6 +154,8 @@ public class PPXMLParser {
                     for (Element spec : speclist) {
                         specdefn.add(parsespec(hetfile, spec));
                     }
+                } else {
+                    throw new PPXMLParserException("unexpected element: " + child.getTagName());
                 }
 
                 het.add(specdefn);
