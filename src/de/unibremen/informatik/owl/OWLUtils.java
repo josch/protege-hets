@@ -64,10 +64,12 @@ public class OWLUtils {
         return ont;
     }
 
-    public static OWLOntology displayOntology(OWLModelManager owlmodelmanager, String ont_string, OWLOntology parent_ont, String iri, String parent_iri) {
+    public static OWLOntology displayOntology(OWLModelManager owlmodelmanager, String ont_string, String iri, String parent_iri) {
         OWLOntologyManager manager = owlmodelmanager.getOWLOntologyManager();
 
         manager.addOntologyStorer(new HetCASLOntologyStorer());
+
+        OWLOntology parent_ont = manager.getOntology(IRI.create("http://informatik.uni-bremen.de/hets/"+parent_iri+".het"));
 
         System.out.println(parent_ont + ", " + parent_iri + ", " + iri);
         if (parent_ont != null && parent_iri != "" && parent_iri != iri) {
@@ -124,5 +126,29 @@ public class OWLUtils {
         owlmodelmanager.setActiveOntology(ontology1);
 
         return ontology1;
+    }
+
+    public static String dumpOntologyToString(OWLOntologyManager ontologymanager, String ontname) {
+        String result;
+
+        OWLOntology ont = ontologymanager.getOntology(IRI.create("http://informatik.uni-bremen.de/hets/"+ontname+".het"));
+
+        System.out.println("ontology: " + ont);
+
+        ByteArrayOutputStream outputstream = new ByteArrayOutputStream();
+
+        try {
+            ontologymanager.saveOntology(ont, outputstream);
+        } catch (OWLOntologyStorageException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        result = outputstream.toString();
+        result = result.replaceAll("(?m)^Prefix: .*$", "");
+        result = result.replaceAll("(?m)^Ontology: .*$", "");
+        result = result.replaceAll("(?m)^Import: .*$", "");
+        result = result.replaceAll("(?m)^\\s*$[\n\r]{1,}", "");
+        result = result.replaceAll("(?m)(^.*$)", "  $1");
+        return result;
     }
 }

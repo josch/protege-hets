@@ -1,5 +1,7 @@
 package de.unibremen.informatik.hets.model;
 
+import org.semanticweb.owlapi.model.OWLOntologyManager;
+
 public class Spec {
     protected String annotation;
     protected String content;
@@ -19,7 +21,7 @@ public class Spec {
         annotation = null;
     }
 
-    public String toString() {
+    public String toString(OWLOntologyManager ontologymanager) {
         return content;
     }
 

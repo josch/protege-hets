@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 public class SpecDefn {
     private ArrayList<Spec> specs;
@@ -34,17 +35,7 @@ public class SpecDefn {
         return specs.iterator();
     }
 
-    // just return the first Basicspec for now
-    public OWLOntology getOntology() {
-        for (Spec spec : specs) {
-            if (spec instanceof Basicspec) {
-                return ((Basicspec)spec).getOntology();
-            }
-        }
-        return null;
-    }
-
-    public String toString() {
+    public String toString(OWLOntologyManager ontologymanager) {
         StringBuilder builder = new StringBuilder();
 
         if (annotation != null && annotation != "") {
@@ -68,7 +59,13 @@ public class SpecDefn {
             if (!(spec instanceof Union)) {
                 builder.append("\n");
             }
-            builder.append(spec.toString());
+
+            // only use the manchester renderer on OWL basicspecs
+            if (logic.equals("OWL")) {
+                builder.append(spec.toString(ontologymanager));
+            } else {
+                builder.append(spec.toString());
+            }
 
             if (it.hasNext()) {
                 builder.append("then");

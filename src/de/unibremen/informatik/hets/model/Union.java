@@ -3,6 +3,8 @@ package de.unibremen.informatik.hets.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.semanticweb.owlapi.model.OWLOntologyManager;
+
 public class Union extends Spec {
     private ArrayList<Spec> specs;
 
@@ -18,7 +20,7 @@ public class Union extends Spec {
         }
     }
 
-    public String toString() {
+    public String toString(OWLOntologyManager ontologymanager) {
         StringBuilder builder = new StringBuilder();
 
         Iterator<Spec> it = specs.iterator();

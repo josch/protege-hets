@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import org.protege.editor.owl.model.OWLModelManager;
 
@@ -20,7 +21,7 @@ public class HetFile {
         specdefns.add(specdefn);
     }
 
-    public String toString() {
+    public String toString(OWLOntologyManager ontologymanager) {
         StringBuilder builder = new StringBuilder();
 
         builder.append("library ");
@@ -38,24 +39,16 @@ public class HetFile {
                 builder.append("\n\n");
             }
 
-            builder.append(specdefn.toString());
+            builder.append(specdefn.toString(ontologymanager));
             builder.append("\n");
         }
 
         return builder.toString();
     }
 
-    public OWLOntology getOntologyByName(String name) {
-        for (SpecDefn specdefn : specdefns) {
-            if (specdefn.getLogic().equals("OWL") && specdefn.getName().equals(name)) {
-                return specdefn.getOntology();
-            }
-        }
-        return null;
-    }
-
     public void displayOntologies(OWLModelManager manager) {
         // TODO: this yet only supports basicspec and simple extension blocks
+        // needs heavy fixing..
 
         for (SpecDefn specdefn : specdefns) {
             if (specdefn.getLogic().equals("OWL")) {
@@ -67,7 +60,7 @@ public class HetFile {
                     Spec spec = it.next();
                     if (spec instanceof Basicspec) {
                         if (parent_iri != "") {
-                            ((Basicspec)spec).displayOntology(manager, specdefn.getName(), getOntologyByName(parent_iri), parent_iri);
+                            ((Basicspec)spec).displayOntology(manager, specdefn.getName(), parent_iri);
                         } else {
                             ((Basicspec)spec).displayOntology(manager, specdefn.getName());
                         }

@@ -83,8 +83,10 @@ public class CGIImportHetsAction extends ProtegeOWLAction {
             e.printStackTrace();
         }
 
-        System.out.println(hetfile.toString());
+        //System.out.println(hetfile.toString());
 
         hetfile.displayOntologies(this.getOWLModelManager());
+
+        ImportedHetFile.setHetFile(hetfile);
 	}
 }
