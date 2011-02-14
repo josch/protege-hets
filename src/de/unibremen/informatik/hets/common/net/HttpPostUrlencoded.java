@@ -11,6 +11,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.FileInputStream;
 
+import de.unibremen.informatik.hets.common.io.IOUtils;
+
 public class HttpPostUrlencoded {
     URLConnection connection;
     OutputStream os = null;
@@ -38,7 +40,7 @@ public class HttpPostUrlencoded {
 
                 write(name + "=");
                 if (object instanceof File) {
-                    write(URLEncoder.encode(InputStreamToString(new FileInputStream((File)object)), "UTF-8"));
+                    write(URLEncoder.encode(IOUtils.getString(new FileInputStream((File)object)), "UTF-8"));
                 } else {
                     write(object.toString());
                 }

@@ -11,6 +11,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.FileInputStream;
 
+import de.unibremen.informatik.hets.common.io.IOUtils;
+
 public class HttpPostMultipart {
     URLConnection connection;
     OutputStream os = null;
@@ -51,7 +53,7 @@ public class HttpPostMultipart {
                         type = "application/octet-stream";
                     write("Content-Type: " + type + "\r\n");
                     write("\r\n");
-                    pipe(new FileInputStream((File)object), os);
+                    IOUtils.copy(new FileInputStream((File)object), os);
                 } else {
                     write("\r\n");
                     write("\r\n");
