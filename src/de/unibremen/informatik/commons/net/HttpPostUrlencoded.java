@@ -1,4 +1,4 @@
-package de.unibremen.informatik.hets.common.net;
+package de.unibremen.informatik.commons.net;
 
 import java.net.URLConnection;
 import java.net.URL;
@@ -11,7 +11,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.FileInputStream;
 
-import de.unibremen.informatik.hets.common.io.IOUtils;
+import de.unibremen.informatik.commons.io.IOUtils;
 
 public class HttpPostUrlencoded {
     URLConnection connection;

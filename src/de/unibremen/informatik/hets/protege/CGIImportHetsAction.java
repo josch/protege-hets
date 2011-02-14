@@ -19,8 +19,8 @@ import java.awt.HeadlessException;
 import org.protege.editor.owl.ui.action.ProtegeOWLAction;
 import org.protege.editor.core.ui.util.UIUtil;
 
-import de.unibremen.informatik.hets.common.net.HttpPostUrlencoded;
-import de.unibremen.informatik.hets.common.io.IOUtils;
+import de.unibremen.informatik.commons.net.HttpPostUrlencoded;
+import de.unibremen.informatik.commons.io.IOUtils;
 import de.unibremen.informatik.hets.model.HetFile;
 import de.unibremen.informatik.hets.model.PPXMLParser;
 import de.unibremen.informatik.hets.model.PPXMLParserException;

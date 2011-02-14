@@ -1,4 +1,4 @@
-package de.unibremen.informatik.hets.common.xml;
+package de.unibremen.informatik.commons.xml;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

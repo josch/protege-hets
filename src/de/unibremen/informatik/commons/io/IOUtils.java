@@ -1,4 +1,4 @@
-package de.unibremen.informatik.hets.common.io;
+package de.unibremen.informatik.commons.io;
 
 import java.io.InputStream;
 import java.io.OutputStream;

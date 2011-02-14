@@ -6,9 +6,9 @@ import java.io.IOException;
 
 import de.unibremen.informatik.hets.model.HetFile;
 import de.unibremen.informatik.hets.model.PPXMLParserException;
-import de.unibremen.informatik.hets.common.xml.Dom;
-import de.unibremen.informatik.hets.common.io.IOUtils;
-import de.unibremen.informatik.hets.common.lang.StringUtils;
+import de.unibremen.informatik.commons.xml.Dom;
+import de.unibremen.informatik.commons.io.IOUtils;
+import de.unibremen.informatik.commons.lang.StringUtils;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

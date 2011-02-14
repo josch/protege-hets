@@ -1,4 +1,4 @@
-package de.unibremen.informatik.hets.common.lang;
+package de.unibremen.informatik.commons.lang;
 
 import java.io.BufferedReader;
 import java.io.StringReader;
