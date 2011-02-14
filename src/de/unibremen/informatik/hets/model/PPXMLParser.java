@@ -100,8 +100,10 @@ public class PPXMLParser {
             return new Basicspec(getrange(hetfile, spec.getAttribute("range")), annotation);
         } else if (spec.getTagName() == "Actuals") {
             return new Actuals(spec.getAttribute("name"), annotation);
+        } else if (spec.getTagName() == "Group") {
+            return new Group(getrange(hetfile, spec.getAttribute("range")), annotation);
         } else {
-            throw new PPXMLParserException();
+            throw new PPXMLParserException("don't know how to handle: " + spec.getTagName());
         }
     }
 
