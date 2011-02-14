@@ -3,6 +3,8 @@ package de.unibremen.informatik.hets.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.semanticweb.owlapi.model.OWLOntology;
+
 public class SpecDefn {
     private ArrayList<Spec> specs;
     private String name;
@@ -22,6 +24,24 @@ public class SpecDefn {
 
     public String getLogic() {
         return logic;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Iterator<Spec> getIterator() {
+        return specs.iterator();
+    }
+
+    // just return the first Basicspec for now
+    public OWLOntology getOntology() {
+        for (Spec spec : specs) {
+            if (spec instanceof Basicspec) {
+                return ((Basicspec)spec).getOntology();
+            }
+        }
+        return null;
     }
 
     public String toString() {

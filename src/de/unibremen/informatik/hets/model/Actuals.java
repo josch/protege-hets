@@ -5,6 +5,10 @@ public class Actuals extends Spec {
         super(cont, anno);
     }
 
+    public String getName() {
+        return content;
+    }
+
     public String toString() {
         return content + "\n";
     }
