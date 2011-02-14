@@ -1,4 +1,9 @@
-package de.unibremen.informatik.hets.common.xml
+package de.unibremen.informatik.hets.common.xml;
+
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import java.util.ArrayList;
 
 public class Dom {
     static {
@@ -6,6 +11,20 @@ public class Dom {
 
     public Dom() {
         super();
+    }
+
+    public static ArrayList<Element> getChildElements(Node item) {
+        ArrayList<Element> result = new ArrayList<Element>();
+        NodeList list = item.getChildNodes();
+
+        for (int i = 0; i < list.getLength(); i++) {
+            Node child = list.item(i);
+            if (child.getNodeType() == Node.ELEMENT_NODE) {
+                result.add((Element)child);
+            }
+        }
+
+        return result;
     }
 
     public static String getTextContent(Element item) {
