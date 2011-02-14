@@ -11,7 +11,10 @@ Import-Package: org.osgi.framework;version="1.3.0",
  org.protege.owlapi.model,
  org.semanticweb.owlapi.model,
  javax.swing,
- javax.swing.border
+ javax.swing.border,
+ javax.xml.parsers,
+ org.w3c.dom,
+ org.xml.sax
 Require-Bundle: org.eclipse.equinox.registry,
  org.eclipse.equinox.common,
  org.protege.common;bundle-version="4.1.0",
