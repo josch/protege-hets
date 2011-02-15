@@ -12,11 +12,11 @@ import java.util.HashSet;
 import org.protege.editor.owl.ui.action.ProtegeOWLAction;
 import org.protege.editor.core.ui.util.UIUtil;
 
+import de.unibremen.informatik.commons.exec.ExecUtils;
+
 public class LocalImportHetsAction extends ProtegeOWLAction {
 
 	private static final long serialVersionUID = -4056096587762591108L;
-
-    private Process process;
 
 	@Override
 	public void initialise() throws Exception {
@@ -39,24 +39,6 @@ public class LocalImportHetsAction extends ProtegeOWLAction {
             e.printStackTrace();
         }
 
-
-        if(process != null) {
-            process.destroy();
-            process = null;
-        }
-
-        Runtime r = Runtime.getRuntime();
-
-        try {
-            process = r.exec("/usr/bin/hets" + " " + file.getAbsolutePath() + " -o pp.xml");
-
-            try {
-                process.waitFor();
-            } catch(InterruptedException irEx) {
-                irEx.printStackTrace();
-            }
-        } catch(IOException ioEx) {
-            ioEx.printStackTrace();
-        }
+        ExecUtils.run("sudo chroot /home/debian-squeeze-i386 /Hets/hets -o pp.xml \"/Hets-lib/trunk/Ontology/Examples/Family.het\"");
 	}
 }
