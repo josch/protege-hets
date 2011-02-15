@@ -1,8 +1,7 @@
 Hets Protege Plugin
 ===================
 
-Originating from an internship task, this now over 5200 lines big plugin
-allows protege to load, edit and save *.het files [rest2html][1].
+This plugin allows protege to load, edit and save [*.het files][1].
 
 It still suffers from most exceptions to be only printed on standard output
 without a popup dialog informing the user of something going wrong so the
