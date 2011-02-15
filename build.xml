@@ -98,6 +98,7 @@
        <fileset dir="." includes="*.xml">
            <exclude name="build.xml"/>
        </fileset>
+       <fileset dir="./resources"/>
      </copy>
    	 <!-- the manifest doesn't belong here but this is good for IDE's -->
      <mkdir dir="${classes}/META-INF"/>
@@ -116,6 +117,10 @@
   <target name = "javacc" depends = "jjtree">
     <javacc target="./src/de/unibremen/informatik/hets/grammar/HetCASLGrammar.jj"
             outputdirectory="./src/de/unibremen/informatik/hets/grammar/"
+            javacchome="/usr/share/java/"
+    />
+    <javacc target="./src/de/unibremen/informatik/hets/graphviz/dotparser/DotParser.jj"
+            outputdirectory="./src/de/unibremen/informatik/hets/graphviz/dotparser/"
             javacchome="/usr/share/java/"
     />
   </target>

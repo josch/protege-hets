@@ -1,4 +1,5 @@
 build/
 src/de/unibremen/informatik/hets/grammar/HetCASLGrammar.jj
 src/de/unibremen/informatik/hets/grammar/*.java
+src/de/unibremen/informatik/hets/graphviz/dotparser/*.java
 .*.swp

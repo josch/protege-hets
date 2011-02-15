@@ -58,4 +58,21 @@
        <label value="Hets"/>
        <class value="de.unibremen.informatik.hets.protege.HetsPreferencesPane"/>
    </extension>
+
+    <extension id="HetsVizTab"
+               point="org.protege.editor.core.application.WorkspaceTab">
+        <label value="HetsViz"/>
+        <class value="org.protege.editor.owl.ui.OWLWorkspaceViewsTab"/>
+        <editorKitId value="OWLEditorKit"/>
+        <index value="KKK"/>
+        <defaultViewConfigFileName value="viewconfig-hetsviz.xml"/>
+    </extension>
+
+    <extension id="HetsVizView"
+               point="org.protege.editor.core.application.ViewComponent">
+        <label value="HetsViz"/>
+        <class value="de.unibremen.informatik.hets.protege.HetsVizView"/>
+        <headerColor value="@org.protege.classcolor"/>
+        <category value="@org.protege.classcategory"/>
+    </extension>
 </plugin>
