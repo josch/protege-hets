@@ -48,10 +48,35 @@ your profile.d or similar.
 Usage
 -----
 
-To run protege,
+To run protege, simply run
+
+	ant run
+
+To import a new *.het file, use the Hets menu in the menubar and then select one of
+the available import methods.
+
+The most well working *.het file is Family.het located in the examples directory of
+this repository.
+
+After doing edits of the contained ontologies the *.het file can be saved using
+the export feature of the Hets menu in the menubar.
+
+Adding the HetsViz tab to the interface will allow a graphical representation of the
+current *.het file hierarchy. (in the menubar under view->Class views->HetsViz)
+
+Using the HetCASL rendering will show a preview of the Manchester OWL output for
+the currently selected ontology. (in the menubar under view->Ontology views->HetCASL rendering)
+
+In the settings dialog (File->Preferences->Hets) several options can be set for the
+plugin.
 
 Features
 --------
+
+ * hets import using custom grammar, local hets, remote cgi
+ * hets export
+ * settings dialog
+ * graphviz view
 
 Missing Features
 ----------------
@@ -59,9 +84,16 @@ Missing Features
  * parsing *.het files containing view sections
  * loading more than one *.het file at once
 
+Currently Broken Features (will be fixed soon)
+----------------------------------------------
+
+ * "local hets" and "custom parser" import methods
+ * hetsview graphviz plugin
+ * settings dialog
+
 Bugs
 ----
 
  * hets interprets a tab as 8 spaces for its pp.xml output - have to work around that
 
-[1] http://www.informatik.uni-bremen.de/agbkb/forschung/formal_methods/CoFI/hets/index_e.htm
+[1]: http://www.informatik.uni-bremen.de/agbkb/forschung/formal_methods/CoFI/hets/index_e.htm
